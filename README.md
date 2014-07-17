@@ -6,3 +6,5 @@ data (as opposed to sequencing data, which is on Google Code).
 	install.packages("devtools")
 	require(devtools)
 	install_github(repo = "EGC.tools", username = "uscepigenomecenter", branch = "recovery")
+  
+  
