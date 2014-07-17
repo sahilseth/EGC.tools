@@ -1,4 +1,4 @@
-Testing USC Methylation pipeline
+USC Methylation pipeline - An Example
 -----
 -----
 
