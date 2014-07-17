@@ -1,14 +1,4 @@
 
-## ----, echo=FALSE, eval=FALSE--------------------------------------------
-## knit("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd", tangle=TRUE,
-##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.R")
-## 
-## knit2html("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd",
-##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.html")
-## 
-## knit("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd",
-##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.md")
-## 
 
 
 ## ----install_libs, eval=FALSE--------------------------------------------
