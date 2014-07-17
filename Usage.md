@@ -7,7 +7,10 @@ USC Methylation pipeline - An Example
 > Last Update: 7/17/2014
 
 
+
+
 ### 1. Installing the required packages
+
 ```r
 ###### ---------- INSTALL dependencies of EGC.tools
 source("http://bioconductor.org/biocLite.R")
@@ -29,7 +32,6 @@ install_github(repo = "EGC.tools", username = "sahilseth",  ref = "recovery")
 ```
 
 ### 2. Download some sample data from TCGA portal
-
 ```
 cd ~/tmp/methylation_test
 
@@ -39,21 +41,25 @@ wget ${baseurl}/humanmethylation450/methylation/jhu-usc.edu_HNSC.HumanMethylatio
 
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.Level_1.9.8.0.tar.gz
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0.tar.gz
+
 ```
 
 ### 3. Setup input files and paramters
+
 ```r
 ## setup my WD
+evaldoc = FALSE
 basepath = "~/tmp/methylation_test"
 levelipath = file.path(basepath, "jhu-usc.edu_HNSC.HumanMethylation450.Level_1.9.8.0")
 auxpath = file.path(basepath, "jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0")
 cohort = "HNSC"
-verbose=FALSE
+verbose = FALSE
 cores = 24
 ```
 
 
 ### 4. Read mapping file and subset it according to data files
+
 ```r
 library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
 library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
@@ -77,11 +83,6 @@ mapping2 <- mapping[mapping$barcode %in% idats,]
 TUMOR <- methylumIDAT(mapping2, parallel=TRUE, idatPath=levelipath)
 ```
 
-```
-## 0 HumanMethylation27 samples found
-## 19 HumanMethylation450 samples found
-```
-
 #### 5.2 Normalization and other processing steps
 
 ```r
@@ -94,14 +95,7 @@ if(!identical(featureNames(TUMOR), probe.ordering)){
 
 ###### --------- Background correction
 TUMOR <- methylumi.bgcorr(TUMOR)
-```
 
-```
-## Background mean & SD estimated from 178406 probes
-## Background mean & SD estimated from 92596 probes
-```
-
-```r
 ###### --------- Reduce Size of Dataset
 TUMOR <- stripMethyLumiSet(TUMOR)
 
@@ -109,24 +103,14 @@ TUMOR <- stripMethyLumiSet(TUMOR)
 TUMOR <- normalizeMethyLumiSet(TUMOR)
 ```
 
-```
-## Normalizing via Illumina controls...
-## Using sample number 11 as reference level...
-```
-
 #### 5.3 Building an archive
+
 ```r
 ###### --------- Generate Level 2 and 3 files
 buildArchive2(TUMOR, base = basepath, parallel = TRUE)
 ```
 
-```
-## Writing level 2 and level 3 data...
-## Creating directory ~/tmp/methylation_test/Level_2 ...
-## Creating directory ~/tmp/methylation_test/Level_3 ...
-```
-
-#### 5.4 Bathwise folders: Expiremental
+#### 5.4 Batchwise folders: Expiremental
 - This assumes a unique and strict directory structure in your home folder
 
 

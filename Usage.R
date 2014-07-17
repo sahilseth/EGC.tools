@@ -1,4 +1,16 @@
 
+## ----, echo=FALSE, eval=FALSE--------------------------------------------
+## knit("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd", tangle=TRUE,
+##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.R")
+## 
+## knit2html("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd",
+##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.html")
+## 
+## knit("/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/meth_notes.Rmd",
+##   output="/scratch/iacs/iacs_dep/sseth/Dropbox/projects/broad_gdac/EGC.tools/Usage.md")
+## 
+
+
 ## ----install_libs, eval=FALSE--------------------------------------------
 ## ###### ---------- INSTALL dependencies of EGC.tools
 ## source("http://bioconductor.org/biocLite.R")
@@ -21,55 +33,56 @@
 
 ## ----input_files---------------------------------------------------------
 ## setup my WD
+evaldoc = FALSE
 basepath = "~/tmp/methylation_test"
 levelipath = file.path(basepath, "jhu-usc.edu_HNSC.HumanMethylation450.Level_1.9.8.0")
 auxpath = file.path(basepath, "jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0")
 cohort = "HNSC"
-verbose=FALSE
+verbose = FALSE
 cores = 24
 
 
-## ----read_mapping--------------------------------------------------------
-library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
-library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
-library(parallel)
-setwd(basepath)
-options('mc.cores' = cores)
-
-###### --------- reading input data
-mapping <- read.csv(file=sprintf("%s/%s.mappings.csv", basepath, cohort), stringsAsFactors=FALSE)
-idats <-  gsub("(.*)_[Grn|Red]*.idat", "\\1", list.files(levelipath, pattern="idat"))
-
-###### --------- subset rows where idats are available
-mapping2 <- mapping[mapping$barcode %in% idats,]
-
-
-## ----reading_data--------------------------------------------------------
-###### --------- reading idats
-TUMOR <- methylumIDAT(mapping2, parallel=TRUE, idatPath=levelipath)
+## ----read_mapping, eval=evaldoc------------------------------------------
+## library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
+## library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
+## library(parallel)
+## setwd(basepath)
+## options('mc.cores' = cores)
+## 
+## ###### --------- reading input data
+## mapping <- read.csv(file=sprintf("%s/%s.mappings.csv", basepath, cohort), stringsAsFactors=FALSE)
+## idats <-  gsub("(.*)_[Grn|Red]*.idat", "\\1", list.files(levelipath, pattern="idat"))
+## 
+## ###### --------- subset rows where idats are available
+## mapping2 <- mapping[mapping$barcode %in% idats,]
 
 
-## ----normalization-------------------------------------------------------
-###### --------- reordering probes
-data(probe.ordering)
-if(!identical(featureNames(TUMOR), probe.ordering)){
-  message("Reordering the probes")
-  TUMOR <- TUMOR[match(probe.ordering, featureNames(TUMOR)), ]
-  }
-
-###### --------- Background correction
-TUMOR <- methylumi.bgcorr(TUMOR)
-
-###### --------- Reduce Size of Dataset
-TUMOR <- stripMethyLumiSet(TUMOR)
-
-###### --------- Dye-Bias Equalization (Only for 450k data)
-TUMOR <- normalizeMethyLumiSet(TUMOR)
+## ----reading_data, eval=evaldoc------------------------------------------
+## ###### --------- reading idats
+## TUMOR <- methylumIDAT(mapping2, parallel=TRUE, idatPath=levelipath)
 
 
-## ----output--------------------------------------------------------------
-###### --------- Generate Level 2 and 3 files
-buildArchive2(TUMOR, base = basepath, parallel = TRUE)
+## ----normalization, eval=evaldoc-----------------------------------------
+## ###### --------- reordering probes
+## data(probe.ordering)
+## if(!identical(featureNames(TUMOR), probe.ordering)){
+##   message("Reordering the probes")
+##   TUMOR <- TUMOR[match(probe.ordering, featureNames(TUMOR)), ]
+##   }
+## 
+## ###### --------- Background correction
+## TUMOR <- methylumi.bgcorr(TUMOR)
+## 
+## ###### --------- Reduce Size of Dataset
+## TUMOR <- stripMethyLumiSet(TUMOR)
+## 
+## ###### --------- Dye-Bias Equalization (Only for 450k data)
+## TUMOR <- normalizeMethyLumiSet(TUMOR)
+
+
+## ----output, eval=evaldoc------------------------------------------------
+## ###### --------- Generate Level 2 and 3 files
+## buildArchive2(TUMOR, base = basepath, parallel = TRUE)
 
 
 ## ----build_archives, eval = FALSE----------------------------------------
