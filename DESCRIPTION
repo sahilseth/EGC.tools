@@ -8,6 +8,6 @@ Maintainer: Moiz Bootwalla <bootwall@usc.edu>
 Description: Bead mapping, subsetting, and packaging functions (TCGA and other)
 Imports: methylumi, matrixStats, Biobase, methods, GenomicRanges, RCurl, RJSONIO
 Depends: FDb.InfiniumMethylation.hg19, methylumi, GenomicRanges
-Suggests: ggplot2, lumi, chromophobe, xlsx, parallel, GenomicFeatures, RMySQL, RUnit, BiocGenerics
+Suggests: ggplot2, lumi, chromophobe, xlsx, parallel, GenomicFeatures, RUnit, BiocGenerics
 License: AGPL-3
 LazyLoad: yes
