@@ -1,12 +1,10 @@
 Testing USC Methylation pipeline
-================
+-----
+-----
 
+> Sahil Seth
 
----
-author: "Sahil Seth"
-date: "7/9/2014"
-output: html_document
----
+> Last Update: 7/17/2014
 
 
 ### 1. Installing the required packages
