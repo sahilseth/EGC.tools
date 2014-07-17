@@ -44,7 +44,6 @@ wget ${baseurl}/humanmethylation450/methylation/jhu-usc.edu_HNSC.HumanMethylatio
 
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.Level_1.9.8.0.tar.gz
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0.tar.gz
-
 ```
 
 ### 3. Setup input files and paramters

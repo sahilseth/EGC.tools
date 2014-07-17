@@ -27,7 +27,10 @@
 ## ## does not work since RMySQL is missing
 ## #install_github(repo = "EGC.tools", username = "uscepigenomecenter", branch = "recovery")
 ## 
-## ###### ---------- remove reference of MYSQL from NAMESPACE
+## ###### ---------- INSTALL EGC.tools package (this repo)
+## # a few tweaks in DESCRIPTION
+## # add build2.R functions
+## # remove reference of MYSQL from NAMESPACE
 ## install_github(repo = "EGC.tools", username = "sahilseth",  ref = "recovery")
 
 
