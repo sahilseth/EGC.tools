@@ -36,46 +36,46 @@ cores = 24
 
 
 ## ----read_mapping, eval=evaldoc------------------------------------------
-## library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
-## library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
-## library(parallel)
-## setwd(basepath)
-## options('mc.cores' = cores)
-## 
-## ###### --------- reading input data
-## mapping <- read.csv(file=sprintf("%s/%s.mappings.csv", basepath, cohort), stringsAsFactors=FALSE)
-## idats <-  gsub("(.*)_[Grn|Red]*.idat", "\\1", list.files(levelipath, pattern="idat"))
-## 
-## ###### --------- subset rows where idats are available
-## mapping2 <- mapping[mapping$barcode %in% idats,]
+library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
+library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
+library(parallel)
+setwd(basepath)
+options('mc.cores' = cores)
+
+###### --------- reading input data
+mapping <- read.csv(file=sprintf("%s/%s.mappings.csv", basepath, cohort), stringsAsFactors=FALSE)
+idats <-  gsub("(.*)_[Grn|Red]*.idat", "\\1", list.files(levelipath, pattern="idat"))
+
+###### --------- subset rows where idats are available
+mapping2 <- mapping[mapping$barcode %in% idats,]
 
 
 ## ----reading_data, eval=evaldoc------------------------------------------
-## ###### --------- reading idats
-## TUMOR <- methylumIDAT(mapping2, parallel=TRUE, idatPath=levelipath)
+###### --------- reading idats
+TUMOR <- methylumIDAT(mapping2, parallel=TRUE, idatPath=levelipath)
 
 
 ## ----normalization, eval=evaldoc-----------------------------------------
-## ###### --------- reordering probes
-## data(probe.ordering)
-## if(!identical(featureNames(TUMOR), probe.ordering)){
-##   message("Reordering the probes")
-##   TUMOR <- TUMOR[match(probe.ordering, featureNames(TUMOR)), ]
-##   }
-## 
-## ###### --------- Background correction
-## TUMOR <- methylumi.bgcorr(TUMOR)
-## 
-## ###### --------- Reduce Size of Dataset
-## TUMOR <- stripMethyLumiSet(TUMOR)
-## 
-## ###### --------- Dye-Bias Equalization (Only for 450k data)
-## TUMOR <- normalizeMethyLumiSet(TUMOR)
+###### --------- reordering probes
+data(probe.ordering)
+if(!identical(featureNames(TUMOR), probe.ordering)){
+  message("Reordering the probes")
+  TUMOR <- TUMOR[match(probe.ordering, featureNames(TUMOR)), ]
+  }
+
+###### --------- Background correction
+TUMOR <- methylumi.bgcorr(TUMOR)
+
+###### --------- Reduce Size of Dataset
+TUMOR <- stripMethyLumiSet(TUMOR)
+
+###### --------- Dye-Bias Equalization (Only for 450k data)
+TUMOR <- normalizeMethyLumiSet(TUMOR)
 
 
 ## ----output, eval=evaldoc------------------------------------------------
-## ###### --------- Generate Level 2 and 3 files
-## buildArchive2(TUMOR, base = basepath, parallel = TRUE)
+###### --------- Generate Level 2 and 3 files
+buildArchive2(TUMOR, base = basepath, parallel = TRUE)
 
 
 ## ----build_archives, eval = FALSE----------------------------------------
