@@ -28,6 +28,8 @@ require(devtools)
 #install_github(repo = "EGC.tools", username = "uscepigenomecenter", branch = "recovery")
 
 ###### ---------- remove reference of MYSQL from NAMESPACE
+# add build2.R functions
+# a few tweaks in DESCRIPTION
 install_github(repo = "EGC.tools", username = "sahilseth",  ref = "recovery")
 ```
 
