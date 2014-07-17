@@ -8,7 +8,6 @@ USC Methylation pipeline - An Example
 
 
 ### 1. Installing the required packages
-
 ```r
 ###### ---------- INSTALL dependencies of EGC.tools
 source("http://bioconductor.org/biocLite.R")
@@ -30,6 +29,7 @@ install_github(repo = "EGC.tools", username = "sahilseth",  ref = "recovery")
 ```
 
 ### 2. Download some sample data from TCGA portal
+
 ```
 cd ~/tmp/methylation_test
 
@@ -42,7 +42,6 @@ tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0.tar.gz
 ```
 
 ### 3. Setup input files and paramters
-
 ```r
 ## setup my WD
 basepath = "~/tmp/methylation_test"
@@ -55,7 +54,6 @@ cores = 24
 
 
 ### 4. Read mapping file and subset it according to data files
-
 ```r
 library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
 library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
