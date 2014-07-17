@@ -116,7 +116,7 @@ TUMOR <- normalizeMethyLumiSet(TUMOR)
 ## Using sample number 11 as reference level...
 ```
 
-#### 5.3 building an archive
+#### 5.3 Building an archive
 ```r
 ###### --------- Generate Level 2 and 3 files
 buildArchive2(TUMOR, base = basepath, parallel = TRUE)
@@ -128,7 +128,7 @@ buildArchive2(TUMOR, base = basepath, parallel = TRUE)
 ## Creating directory ~/tmp/methylation_test/Level_3 ...
 ```
 
-#### 5.4 bathwise folders: Expiremental
+#### 5.4 Bathwise folders: Expiremental
 - This assumes a unique and strict directory structure in your home folder
 
 
