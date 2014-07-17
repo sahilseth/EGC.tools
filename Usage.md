@@ -1,5 +1,5 @@
+Testing USC Methylation pipeline
 ---
-title: "Testing USC Methylation pipeline"
 author: "Sahil Seth"
 date: "7/9/2014"
 output: html_document
@@ -38,7 +38,6 @@ wget ${baseurl}/humanmethylation450/methylation/jhu-usc.edu_HNSC.HumanMethylatio
 
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.Level_1.9.8.0.tar.gz
 tar -zxvf jhu-usc.edu_HNSC.HumanMethylation450.aux.1.8.0.tar.gz
-
 ```
 
 ### 3. Setup input files and paramters
@@ -58,101 +57,6 @@ cores = 24
 
 ```r
 library(EGC.tools, quietly=!verbose, warn.conflicts=verbose)
-```
-
-```
-## Loading required package: GenomicFeatures
-## Loading required package: BiocGenerics
-## 
-## Attaching package: 'BiocGenerics'
-## 
-## The following objects are masked from 'package:parallel':
-## 
-##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
-##     clusterExport, clusterMap, parApply, parCapply, parLapply,
-##     parLapplyLB, parRapply, parSapply, parSapplyLB
-## 
-## The following object is masked from 'package:stats':
-## 
-##     xtabs
-## 
-## The following objects are masked from 'package:base':
-## 
-##     anyDuplicated, append, as.data.frame, as.vector, cbind,
-##     colnames, do.call, duplicated, eval, evalq, Filter, Find, get,
-##     intersect, is.unsorted, lapply, Map, mapply, match, mget,
-##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
-##     rbind, Reduce, rep.int, rownames, sapply, setdiff, sort,
-##     table, tapply, union, unique, unlist
-## 
-## Loading required package: IRanges
-## Loading required package: GenomicRanges
-## Loading required package: GenomeInfoDb
-## Loading required package: AnnotationDbi
-## Loading required package: Biobase
-## Welcome to Bioconductor
-## 
-##     Vignettes contain introductory material; view with
-##     'browseVignettes()'. To cite Bioconductor, see
-##     'citation("Biobase")', and for packages 'citation("pkgname")'.
-## 
-## Loading required package: Biostrings
-## Loading required package: XVector
-## Loading required package: BSgenome.Hsapiens.UCSC.hg19
-## Loading required package: BSgenome
-## 
-## Attaching package: 'BSgenome'
-## 
-## The following object is masked from 'package:AnnotationDbi':
-## 
-##     species
-## 
-## Loading required package: scales
-## Loading required package: reshape2
-## Loading required package: ggplot2
-## Loading required package: matrixStats
-## 
-## Attaching package: 'matrixStats'
-## 
-## The following objects are masked from 'package:Biobase':
-## 
-##     anyMissing, rowMedians
-## 
-## Loading required package: minfi
-## Loading required package: lattice
-## Loading required package: bumphunter
-## Loading required package: foreach
-## foreach: simple, scalable parallel programming from Revolution Analytics
-## Use Revolution R for scalability, fault tolerance and more.
-## http://www.revolutionanalytics.com
-## Loading required package: iterators
-## Loading required package: locfit
-## locfit 1.5-9.1 	 2013-03-22
-```
-
-```
-## Warning: replacing previous import by 'graphics::image' when loading
-## 'methylumi'
-```
-
-```
-## Loading required package: org.Hs.eg.db
-## Loading required package: DBI
-```
-
-```
-## Warning: 'IlluminaHumanMethylation450k.db' is deprecated.
-## Use 'FDb.InfiniumMethylation.hg19' instead.
-## Use 'FDb.InfiniumMethylation.hg18' instead.
-## Use 'mapToGenome() function in minfi or methylumi' instead.
-## See help("Deprecated")
-```
-
-```
-## 
-```
-
-```r
 library(IlluminaHumanMethylation450k.db, quietly=!verbose, warn.conflicts=verbose)
 library(parallel)
 setwd(basepath)
@@ -195,19 +99,6 @@ TUMOR <- methylumi.bgcorr(TUMOR)
 
 ```
 ## Background mean & SD estimated from 178406 probes
-```
-
-```
-## Loading required package: MASS
-## 
-## Attaching package: 'MASS'
-## 
-## The following object is masked from 'package:AnnotationDbi':
-## 
-##     select
-```
-
-```
 ## Background mean & SD estimated from 92596 probes
 ```
 
@@ -225,7 +116,6 @@ TUMOR <- normalizeMethyLumiSet(TUMOR)
 ```
 
 #### 5.3 building an archive
-
 ```r
 ###### --------- Generate Level 2 and 3 files
 buildArchive2(TUMOR, base = basepath, parallel = TRUE)
